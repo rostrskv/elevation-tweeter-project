@@ -29,6 +29,9 @@ const Tweeter = function () {
     }
 
     const addPost = function (text) {
+        if (text.trim().length === 0) {
+            throw new Error("Post text is empty")
+        }
         const post = {
             text: text,
             id: `p${++_postIdCounter}`,
@@ -38,12 +41,21 @@ const Tweeter = function () {
     }
 
     const removePost = function (postId) {
-        const index = _posts.findIndex(p => p.id === postId)
-        _posts.splice(index, 1)
+        const postIndex = _posts.findIndex(p => p.id === postId)
+        if (postIndex < 0) {
+            throw new Error(`Post not found, id:${postId}`)
+        }
+        _posts.splice(postIndex, 1)
     }
 
     const addComment = function (text, postId) {
+        if (text.trim().length === 0) {
+            throw new Error("Comment text is empty")
+        }
         const post = _posts.find(p => p.id === postId)
+        if (post === undefined) {
+            throw new Error("Post not found")
+        }
         const comment = {
             id: `c${++_commentIdCounter}`,
             text: text
@@ -53,7 +65,13 @@ const Tweeter = function () {
 
     const removeComment = function (postId, commentId) {
         const post = _posts.find(p => p.id === postId)
+        if (post === undefined) {
+            throw new Error("Post not found")
+        }
         const commentIndex = post.comments.findIndex(c => c.id === commentId)
+        if (commentIndex < 0) {
+            throw new Error("Comment not found")
+        }
         post.comments.splice(commentIndex, 1)
     }
 
