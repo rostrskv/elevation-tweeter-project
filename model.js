@@ -43,7 +43,7 @@ const Tweeter = function () {
     const removePost = function (postId) {
         const postIndex = _posts.findIndex(p => p.id === postId)
         if (postIndex < 0) {
-            throw new Error(`Post not found, id:${postId}`)
+            throw new Error("Post not found")
         }
         _posts.splice(postIndex, 1)
     }
