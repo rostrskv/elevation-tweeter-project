@@ -5,7 +5,8 @@ const Renderer = function () {
         postsElement.empty()
         for(const post of posts)
         {
-            postsElement.append(`<div data-id="${post.id}" class="post-text">${post.text}</div>`);
+            const postTextElement = postsElement.append(`<div data-id="${post.id}" id="${post.id}" class="post-text"></div>`);
+            $(`#${[post.id]}`).append(post.text);
         }
     }
     return { renderPosts }
