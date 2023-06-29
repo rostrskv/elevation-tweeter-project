@@ -18,9 +18,22 @@ const deleteHandler = function () {
 }
 
 const commentHandler = function () {
-    const postId = $(this).closest(".post").data("id")
+    const postElement = $(this).closest(".post")
+    const postId = postElement.data("id")
+    tweeter.addComment(postElement.find(".comment-input").val(), postId)
+    renderer.renderPosts(tweeter.getPosts())
+}
+
+const deleteCommentHandler = function () {
+    const postElement = $(this).closest(".post")
+    const postId = postElement.data("id")
+    const commentElement = $(this).closest(".comment")
+    const commentId = commentElement.data("id")
+    tweeter.removeComment(postId, commentId)
+    renderer.renderPosts(tweeter.getPosts())
 }
 
 $("body")
     .on("click", ".delete", deleteHandler)
     .on("click", ".comment-button", commentHandler)
+    .on("click", ".delete-comment", deleteCommentHandler)
