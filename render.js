@@ -5,9 +5,16 @@ const Renderer = function () {
         postsElement.empty()
         for (const post of posts) {
             const postTextElement = postsElement.append(
-                `<div data-id="${post.id}" id="${post.id}" class="post-text"></div>`
+                `<div class="post"  data-id="${post.id}" id="${post.id}">                
+<div class="post-text"></div>
+<button class="delete">\u00D7 Delete post</button>
+<input type="text" class="comment-input">
+<button class="comment-button">Comment</button>
+<div class="comments"></div>
+</div>
+`
             )
-            $(`#${post.id}`).text(post.text)
+            $(`#${post.id}`).find(".post-text").text(post.text)
         }
     }
     return { renderPosts }
