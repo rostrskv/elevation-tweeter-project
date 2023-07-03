@@ -25,7 +25,7 @@ const Tweeter = function () {
     let _commentIdCounter = 6
 
     const getPosts = function () {
-        return _posts
+        return structuredClone(_posts)
     }
 
     const addPost = function (text) {
@@ -76,10 +76,10 @@ const Tweeter = function () {
     }
 
     return {
-        getPosts: getPosts,
-        addPost: addPost,
-        removePost: removePost,
-        addComment: addComment,
-        removeComment: removeComment
+        getPosts,
+        addPost,
+        removePost,
+        addComment,
+        removeComment
     }
 }
